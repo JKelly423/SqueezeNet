@@ -86,10 +86,10 @@ class DataPlug:
         self.df = pd.DataFrame(reddit_posts)
         return self.df
 
-    def get_price_datafrane(self, filename='GME.csv'):
+    def get_price_datafrane(self, filename='./../data/GME.csv'):
         """A funciton to get dataframe of price data from csv
 
-        :params: filename: name of CSV file; defaults to 'GME.csv'
+        :params: filename: name of CSV file; defaults to './../data/GME.csv'
         :returns: pandas dataframe
         """
         self.priceDF = pd.read_csv(filename)
