@@ -14,6 +14,7 @@ class DataPlug:
     :attributes: user_agent: user agent for reddit
     :attributes: client_id: client id for reddit
     :attributes: client_secret: client secret for reddit
+    :attributes: priceDF: price dataframe of GME stock price
     """
 
 
@@ -45,6 +46,15 @@ class DataPlug:
         """
         self.df = pd.DataFrame([x.__dict__ for x in data])
         return self.df
+
+    def get_price_datafrane(self, filename='GME.csv'):
+        """A funciton to get dataframe of price data from csv
+
+        :params: filename: name of CSV file; defaults to 'GME.csv'
+        :returns: pandas dataframe
+        """
+        self.priceDF = pd.read_csv(filename)
+        return self.priceDF
 
     def __init__(self, name):
         """Initialize DataPlug class and load config
