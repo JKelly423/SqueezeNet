@@ -1,4 +1,5 @@
 # Feed forward neural network class
+# Got this from excessive week 1 for ANN course
 class Network(object):
 
     def __init__(self, sizes):
