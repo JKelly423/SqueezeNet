@@ -1,5 +1,5 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
+# Kieran test
 class SqueezeNet:
     """The main SqeezeNet class that uses all the modules in order to perform it's task"""
 
