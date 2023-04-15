@@ -33,6 +33,27 @@ class DataPlug:
         data = r.json()['data']
         return data
 
+    # A function to convert epoch time to a readable date
+    def get_date(self, epoch_time):
+        """Convert epoch time to a readable date.
+
+        :params: epoch_time: time to convert
+
+        :returns: date: readable date string
+        """
+        date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(epoch_time))
+        return date
+
+    # A function to convert readable date to epoch time
+    def get_epoch(self, date):
+        """Convert readable date to epoch time.
+
+        :params: date: date string to convert
+
+        :returns: epoch_time: epoch time
+        """
+        epoch_time = time.mktime(time.strptime(date, '%Y-%m-%d %H:%M:%S'))
+        return epoch_time
 
     def get_data(self, subreddit, limit):
         """Get data from reddit.
