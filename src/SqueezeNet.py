@@ -19,7 +19,8 @@ class SqueezeNet:
             """
 
         # Convert the custom remove words to lowercase
-        custom_remove_words = [w.lower() for w in custom_remove_words]
+        if custom_remove_words is not None:
+            custom_remove_words = [w.lower() for w in custom_remove_words]
 
         #Remove "||" and "NaN"
         text = text.replace("||", "")
@@ -31,10 +32,9 @@ class SqueezeNet:
 
         # Remove custom remove words
         if custom_remove_words is not None:
-            words = [w for w in words if w.lower() not in custom_remove_words]  
-
-        # Remove words that are capitalized in the text but not in the original list
-        words = [w for w in words if w.lower() not in [r.lower() for r in custom_remove_words] or w.islower()]
+            words = [w for w in words if w.lower() not in custom_remove_words]
+            # Remove words that are capitalized in the text but not in the original list
+            words = [w for w in words if w.lower() not in [r.lower() for r in custom_remove_words] or w.islower()]
 
         # Join the words back into a single string
         cleaned_text = ' '.join(words)
