@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import requests
 import time
+import re
 
 class DataPlug:
     """
@@ -105,6 +106,20 @@ class DataPlug:
             reddit_posts.append(post)
 
         self.df = pd.DataFrame(reddit_posts)
+        return self.df
+
+
+    def get_reddit_dataframe(self, filename='./../data/reddit_wsb.csv'):
+        """A funciton to get dataframe of price data from csv
+
+        :params: filename: name of CSV file; defaults to './../data/reddit_wsb.csv'
+        :returns: pandas dataframe
+        """
+        self.df = pd.read_csv(filename)
+
+        # Floor the datetime for each post to be only yyyy-mm-dd so it lines up with the price data.
+        self.df['timestamp'] = self.df['timestamp'].astype('datetime64[ns]').dt.floor('D')
+
         return self.df
 
     def get_price_datafrane(self, filename='./../data/GME.csv'):
