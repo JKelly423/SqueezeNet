@@ -131,3 +131,19 @@ dmypy.json
 .idea/
 
 configAPI.json
+
+docs/conf.py
+
+docs/make.bat
+
+docs/index.rst
+
+docs/DataPlug.rst
+
+docs/Makefile
+
+docs/modules.rst
+
+docs/Network.rst
+
+docs/SqueezeNet.rst
