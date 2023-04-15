@@ -1,5 +1,24 @@
 # Feed forward neural network class
 # Got this from excessive week 1 for ANN course
+import numpy as np
+import tensorflow.keras as keras
+from keras.models import Sequential
+from keras.layers import Dense
+
+# Miscellaneous functions
+def sigmoid(z):
+    """The sigmoid function."""
+    return 1 / (1 + np.exp(-z))
+
+def sigmoid_prime(z):
+    """Derivative of the sigmoid function."""
+    return sigmoid(z) * (1 - sigmoid(z))
+
+def step(z, threshold=0.5):
+    if z > threshold:
+        return 1
+    return 0
+
 class Network(object):
 
     def __init__(self, sizes):
@@ -148,3 +167,4 @@ class Network(object):
         """Return the vector of partial derivatives \partial C_x /
         \partial a for the output activations."""
         return output_activations - y
+#%%
