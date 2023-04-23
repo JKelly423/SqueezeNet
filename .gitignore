@@ -130,7 +130,7 @@ dmypy.json
 
 .idea/
 
-configAPI.json
+src/configAPI.json
 
 docs/conf.py
 
