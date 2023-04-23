@@ -1,4 +1,4 @@
-import praw
+
 import pandas as pd
 import json
 import requests
@@ -9,13 +9,14 @@ class DataPlug:
     """
     DataPlug class. Used for data aquisition from reddit.
 
-    :attributes: name: name of the user agent
-    :attributes: reddit_raw_data: raw data from reddit
-    :attributes: df: pandas dataframe
-    :attributes: user_agent: user agent for reddit
-    :attributes: client_id: client id for reddit
-    :attributes: client_secret: client secret for reddit
-    :attributes: priceDF: price dataframe of GME stock price
+    :attribute name: name of the user agent
+    :attribute reddit_raw_data: raw data from reddit
+    :attribute df: pandas dataframe
+    :attribute user_agent: user agent for reddit
+    :attribute client_id: client id for reddit
+    :attribute client_secret: client secret for reddit
+    :attribute priceDF: price dataframe of GME stock price
+    :attribute mergedDF: merged dataframe of reddit and price data
     """
 
 # get data from reddit for a subreddit filtering by date using the pushshift api
@@ -65,6 +66,7 @@ class DataPlug:
         :returns: data: data from reddit
         """
 
+        pass
         # Create instance of PRAW using the config file data now stored as attributes
         reddit = praw.Reddit(
             client_id=self.client_id,
@@ -108,6 +110,18 @@ class DataPlug:
         self.df = pd.DataFrame(reddit_posts)
         return self.df
 
+    def merge_dataframes(self,):
+        """Merge the price and reddit dataframes
+
+        :returns: pandas dataframe
+        """
+        merged_df = self.priceDF.merge(self.df, how='inner', on=['timestamp'])
+
+        # Drop the columns we do not need
+        merged_df = merged_df.drop(columns=['id', 'url', 'created'])
+
+        self.mergedDF = merged_df
+        return self.mergedDF
 
     def aggregate_reddit_posts_daily(self):
 
@@ -180,5 +194,11 @@ class DataPlug:
         self.user_agent = config['redditConfig']['user_agent']
         self.client_id = config['redditConfig']['client_id']
         self.client_secret = config['redditConfig']['client_secret']
+
+        # Declare attributes
+        self.priceDF = None
+        self.df = None
+        self.mergedDF = None
+        self.reddit_raw_data = None
 
 #%%

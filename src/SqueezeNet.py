@@ -3,6 +3,7 @@ import nltk
 nltk.download('stopwords')
 from nltk.tokenize import word_tokenize
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import re
 
 # Kieran test
 class SqueezeNet:
@@ -54,14 +55,14 @@ class SqueezeNet:
         :returns: score: the sentiment score
         """
         custom_emoji_scores = {
-            'rocket': 4.0
-            'gem stone': 4.0
-            'raising hands': 3.0
-            'bull': 3.5
-            'bear': -3.5
-            'toilet paper': -4
-            'fire': 3.0
-            'green': 2
+            'rocket': 4.0,
+            'gem stone': 4.0,
+            'raising hands': 3.0,
+            'bull': 3.5,
+            'bear': -3.5,
+            'toilet paper': -4,
+            'fire': 3.0,
+            'green': 2,
             'red': -2
         }
         #Create an instance of the sentiment analyzer
@@ -82,3 +83,4 @@ class SqueezeNet:
         """The constructor of the SqueezeNet class"""
 
         self.name = name
+#%%
