@@ -117,13 +117,35 @@ class DataPlug:
         """
         merged_df = self.priceDF.merge(self.df, how='inner', on=['timestamp'])
 
-        # Drop the columns we do not need
-        merged_df = merged_df.drop(columns=['id', 'url', 'created'])
 
         self.mergedDF = merged_df
         return self.mergedDF
 
     def aggregate_reddit_posts_daily(self):
+
+        """Aggregate reddit posts by date. Turns dataframe for each reddit post into one dataframe with average results across all posts for each day.
+
+        :params: None
+
+        :returns: pandas dataframe
+        """
+        agg_func = {'title': list, 'score': 'mean', 'id': list, 'url': list, 'comms_num': 'mean', 'created': 'first', 'body': list}
+
+        # Replace NaN values with 'NaN'
+        self.df['body'] = self.df['body'].fillna('NaN')
+        # Group by date and aggregate
+        df_new = self.df.groupby(self.df['timestamp']).aggregate(agg_func)
+        # Join lists of titles, ids, urls, and bodies into one string per date to perform sentiment analysis.
+        df_new['title'] = df_new['title'].apply(lambda x: '||'.join(x))
+        df_new['id'] = df_new['id'].apply(lambda x: '||'.join(x))
+        df_new['url'] = df_new['url'].apply(lambda x: '||'.join(x))
+        df_new['body'] = df_new['body'].apply(lambda x: '||'.join(x))
+
+        self.df = df_new
+
+        return self.df
+
+    def new_aggregate_reddit_posts_daily(self):
 
         """Aggregate reddit posts by date. Turns dataframe for each reddit post into one dataframe with average results across all posts for each day.
 
