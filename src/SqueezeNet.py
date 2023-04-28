@@ -54,7 +54,17 @@ class SqueezeNet:
 
         :returns: score: the sentiment score
         """
-        custom_emoji_scores = {
+
+        # Get the sentiment score
+        score = self.analyzer.polarity_scores(text)
+
+        # Return the sentiment score
+        return score
+
+
+    def __init__(self, name):
+        """The constructor of the SqueezeNet class"""
+        self.custom_emoji_scores = {
             'rocket': 4.0,
             'gem stone': 4.0,
             'raising hands': 3.0,
@@ -66,21 +76,8 @@ class SqueezeNet:
             'red': -2
         }
         #Create an instance of the sentiment analyzer
-        analyzer = SentimentIntensityAnalyzer()
-
+        self.analyzer = SentimentIntensityAnalyzer()
         # Update VADER's emoji sentiment scores with custom scores
-        analyzer.lexicon.update(custom_emoji_scores)
-
-        # Get the sentiment score
-        score = analyzer.polarity_scores(text)
-
-        # Return the sentiment score
-        return score
-
-
-
-    def __init__(self, name):
-        """The constructor of the SqueezeNet class"""
-
+        self.analyzer.lexicon.update(self.custom_emoji_scores)
         self.name = name
 #%%
