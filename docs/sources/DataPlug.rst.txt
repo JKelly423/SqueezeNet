@@ -1,0 +1,7 @@
+DataPlug module
+===============
+
+.. automodule:: DataPlug
+   :members:
+   :undoc-members:
+   :show-inheritance:

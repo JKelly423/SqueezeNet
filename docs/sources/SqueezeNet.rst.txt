@@ -1,0 +1,7 @@
+SqueezeNet module
+=================
+
+.. automodule:: SqueezeNet
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -148,3 +148,13 @@ docs/Network.rst
 
 docs/SqueezeNet.rst
 .DS_Store
+
+*.rar
+
+data/all_posts_with_sentiment.csv
+
+data/r_wallstreetbets_posts.csv
+
+data/mergedDF.csv
+
+data/GME.csv
