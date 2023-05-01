@@ -13,10 +13,11 @@ class SqueezeNet:
     def clean_text(self, text, custom_remove_words=None):
         """Given some text, return a list of clean words.
 
-        :params: text: Text to clean up
-        "params: custom_remove_words: A list of words to also remove
+        :param text: Text to clean up
+        :param custom_remove_words: A list of words to also remove
 
-        :returns: filtered_text: Filters words that are 1-2 character in length and custom words
+        :return: filtered_text: Filters words that are 1-2 character in length and custom words
+        :rtype: list
             """
 
         # Convert the custom remove words to lowercase
@@ -50,9 +51,10 @@ class SqueezeNet:
     def sentiment_analysis(self, text):
         """A function to perform sentiment analysis with vaderSentiment
 
-        :params: text: text to perform sentiment analysis on
+        :param text: text to perform sentiment analysis on
 
-        :returns: score: the sentiment score
+        :return: score: the sentiment score
+        :rtype: dict
         """
 
         # Get the sentiment score

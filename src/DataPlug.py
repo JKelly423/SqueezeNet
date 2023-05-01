@@ -9,26 +9,28 @@ class DataPlug:
     """
     DataPlug class. Used for data aquisition from reddit.
 
-    :attribute name: name of the user agent
-    :attribute reddit_raw_data: raw data from reddit
-    :attribute df: pandas dataframe
-    :attribute user_agent: user agent for reddit
-    :attribute client_id: client id for reddit
-    :attribute client_secret: client secret for reddit
-    :attribute priceDF: price dataframe of GME stock price
-    :attribute mergedDF: merged dataframe of reddit and price data
+    :Attributes:
+    * :name: name of the user agent
+    * :reddit_raw_data: raw data from reddit
+    * :df: pandas dataframe
+    * :user_agent: user agent for reddit
+    * :client_id: client id for reddit
+    * :client_secret: client secret for reddit
+    * :priceDF: price dataframe of GME stock price
+    * :mergedDF: merged dataframe of reddit and price data
     """
 
 # get data from reddit for a subreddit filtering by date using the pushshift api
     def get_data_pushshift(self, subreddit, limit, before, after):
         """Get data from reddit.
 
-        :params: subreddit: subreddit to get data from
-        :params: limit: number of posts to get
-        :params: before: time to get posts before
-        :params: after: time to get posts after
+        :param subreddit: subreddit to get data from
+        :param limit: number of posts to get
+        :param before: time to get posts before
+        :param after: time to get posts after
 
-        :returns: data: data from reddit
+        :return: data from reddit
+        :rtype: dict
         """
         url = f"https://api.pushshift.io/reddit/search/submission/?subreddit={subreddit}&size={limit}&before={before}&after={after}&aggs=author"
         r = requests.get(url)
@@ -39,9 +41,10 @@ class DataPlug:
     def get_date(self, epoch_time):
         """Convert epoch time to a readable date.
 
-        :params: epoch_time: time to convert
+        :param epoch_time: time to convert
 
-        :returns: date: readable date string
+        :return: date: readable date
+        :rtype: str
         """
         date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(epoch_time))
         return date
@@ -50,9 +53,10 @@ class DataPlug:
     def get_epoch(self, date):
         """Convert readable date to epoch time.
 
-        :params: date: date string to convert
+        :param date: date string to convert
 
-        :returns: epoch_time: epoch time
+        :return: epoch_time: epoch time
+        :rtype: float
         """
         epoch_time = time.mktime(time.strptime(date, '%Y-%m-%d %H:%M:%S'))
         return epoch_time
@@ -60,10 +64,11 @@ class DataPlug:
     def get_data(self, subreddit, limit):
         """Get data from reddit.
 
-        :params: subreddit: subreddit to get data from
-        :params: limit: number of posts to get
+        :param subreddit: subreddit to get data from
+        :param limit: number of posts to get
 
-        :returns: data: data from reddit
+        :return: data: data from reddit
+        :rtype: dict
         """
 
         pass
@@ -80,9 +85,10 @@ class DataPlug:
     def data_to_pandas(self, data):
         """Convert reddit data to pandas dataframe.
 
-        :params: data: data to convert
+        :param data: data to convert
 
-        :returns: pandas dataframe
+        :return: pandas dataframe
+        :rtype: pandas dataframe
         """
         reddit_posts = []
 
@@ -110,10 +116,11 @@ class DataPlug:
         self.df = pd.DataFrame(reddit_posts)
         return self.df
 
-    def merge_dataframes(self,):
-        """Merge the price and reddit dataframes
+    def merge_dataframes(self):
+        """Merge the price and reddit dataframes.
 
-        :returns: pandas dataframe
+        :return: pandas dataframe
+        :rtype: pandas dataframe
         """
         merged_df = self.priceDF.merge(self.df, how='inner', on=['timestamp'])
 
@@ -125,9 +132,9 @@ class DataPlug:
 
         """Aggregate reddit posts by date. Turns dataframe for each reddit post into one dataframe with average results across all posts for each day.
 
-        :params: None
 
-        :returns: pandas dataframe
+        :return: pandas dataframe of aggregated reddit posts
+        :rtype: pandas dataframe
         """
         agg_func = {'title': list, 'score': 'mean', 'id': list, 'url': list, 'comms_num': 'mean', 'created': 'first', 'body': list}
 
@@ -147,11 +154,10 @@ class DataPlug:
 
     def new_aggregate_reddit_posts_daily(self):
 
-        """Aggregate reddit posts by date. Turns dataframe for each reddit post into one dataframe with average results across all posts for each day.
+        """Aggregate reddit posts by date. Returns dataframe for each reddit post into one dataframe with average results across all posts for each day.
 
-        :params: None
-
-        :returns: pandas dataframe
+        :return: Aggregated reddit posts daily
+        :rtype: pandas dataframe
         """
         agg_func = {'title': list, 'score': 'mean', 'id': list, 'url': list, 'comms_num': 'mean', 'created': 'first', 'body': list}
 
@@ -172,8 +178,9 @@ class DataPlug:
     def get_reddit_dataframe(self, filename='./../data/reddit_wsb.csv'):
         """A funciton to get dataframe of price data from csv
 
-        :params: filename: name of CSV file; defaults to './../data/reddit_wsb.csv'
-        :returns: pandas dataframe
+        :param filename: name of CSV file; defaults to './../data/reddit_wsb.csv'
+        :return: pandas dataframe of reddit data. Saved to *self.df* attribute.
+        :rtype: pandas dataframe
         """
         self.df = pd.read_csv(filename)
 
@@ -183,10 +190,11 @@ class DataPlug:
         return self.df
 
     def get_price_dataframe(self, filename='./../data/GME.csv'):
-        """A funciton to get dataframe of price data from csv
+        """A funciton to get dataframe of price data from csv.
 
-        :params: filename: name of CSV file; defaults to './../data/GME.csv'
-        :returns: pandas dataframe
+        :param filename: name of CSV file; defaults to './../data/GME.csv'
+        :return: pandas dataframe of price data. Saved to *self.priceDF* attribute.
+        :rtype: pandas dataframe
         """
         self.priceDF = pd.read_csv(filename)
         # Rename 'Date' column to 'timestamp' to match the price dataframe for merging
@@ -198,8 +206,9 @@ class DataPlug:
     def __init__(self, name):
         """Initialize DataPlug class and load config
 
-        :params: name: name of the user agent
-        :returns: None
+        :param name: name of the network. Saved to *self.name* attribute.
+        :return: None
+        :rtype: None
         """
         # Open and load config file into a config object
         try:
