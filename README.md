@@ -8,3 +8,8 @@ A Feed-Forward Network designed to identify the relationship between r/WallStree
 ## Documentation
 
 #### Full Documentation can be read on the [the SqueezeNet Project Website](https://jkelly423.github.io/SqueezeNet/)
+
+---
+## Copyright
+
+&copy; 2023 Jack Kelly, Andrew Lim, Kieran O'Dell
