@@ -10,6 +10,8 @@ A Random Forest Regressor to identify the relationship between r/WallStreetBets 
 
 #### An Article documenting our idea, approach, results, and conclusions [can be read here.](https://medium.com/@andrewlim_68756/predicting-the-stock-market-with-reddit-posts-4843fecbb85f)
 
+#### The same article can be found on [this repository's Wiki page.](https://github.com/JKelly423/SqueezeNet/wiki)
+
 
 ---
 ## Documentation
