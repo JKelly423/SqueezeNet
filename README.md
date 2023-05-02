@@ -1,4 +1,4 @@
-# SqueezeNet
+# :chart_with_upwards_trend: [SqueezeNet](https://github.com/JKelly423/SqueezeNet/wiki)
 #### Created by [Jack Kelly](https://github.com/JKelly423), [Kieran O'Dell](https://github.com/KieranOdell), and [Andrew Lim](https://github.com/alfast10)
 ---
 
